@@ -21,15 +21,14 @@ public class StudentService {
     }
 
 
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
-    public Student getStudentById(Long id){
+    public Student getStudentById(Long id) {
         Optional<Student> student = studentRepository.findById(id);
         return student.orElse(null);
     }
-
 
 
 }

@@ -35,6 +35,7 @@ public class RoomService {
         System.out.println(room.orElse(null));
         return room.isPresent() ? room.get() : null;
     }
+
     public void updateRoomById(Long id, List<Long> studentIds) {
         Room room = getRoomById(id);
         Set<Student> students = new HashSet<>();
@@ -49,9 +50,6 @@ public class RoomService {
     public void deleteRoomById(Long id) {
         roomRepository.deleteById(id);
     }
-
-
-
 
 
     public List<Room> getRoomsForRatOwners() {

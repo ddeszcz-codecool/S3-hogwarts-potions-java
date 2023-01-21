@@ -18,17 +18,17 @@ public class RoomController {
     }
 
     @GetMapping
-    public List<Room> getAllRooms(){
+    public List<Room> getAllRooms() {
         return roomService.getAllRooms();
     }
 
     @PostMapping
-    public void addRoom(@RequestBody Room room){
+    public void addRoom(@RequestBody Room room) {
         roomService.addRoom(room);
     }
 
     @GetMapping("/{id}")
-    public Room getRoomById(@PathVariable("id") Long id){
+    public Room getRoomById(@PathVariable("id") Long id) {
         return roomService.getRoomById(id);
     }
 
@@ -39,13 +39,13 @@ public class RoomController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteRoomById(@PathVariable("id") Long id){
+    public void deleteRoomById(@PathVariable("id") Long id) {
         roomService.deleteRoomById(id);
     }
 
     //Get rooms where no cat or owl lives
     @GetMapping("/rat-owners")
-    public List<Room> getRoomsForRatOwners(){
+    public List<Room> getRoomsForRatOwners() {
         return roomService.getRoomsForRatOwners();
     }
 }

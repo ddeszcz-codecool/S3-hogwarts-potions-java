@@ -1,6 +1,5 @@
 package com.codecool.hogwarts_potions.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -15,7 +14,7 @@ import javax.persistence.Id;
 @Entity
 public class Student {
 
-//    @JsonIgnore
+    //    @JsonIgnore
     @Id
     @GeneratedValue
     private Long id;
