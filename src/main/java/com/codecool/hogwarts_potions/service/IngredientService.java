@@ -46,4 +46,15 @@ public class IngredientService {
         }
         return isHasNew;
     }
+
+    public Ingredient getPersistentIngredientToPotion(Ingredient ingredient) {
+        String ingredientName = ingredient.getName();
+        ingredient.setName(ingredient.getName().toLowerCase());
+
+        if (!ingredientRepository.existsByName(ingredientName)) {
+            ingredientRepository.saveAndFlush(ingredient);
+        }
+        return ingredientRepository.getIngredientByName(ingredientName);
+
+    }
 }

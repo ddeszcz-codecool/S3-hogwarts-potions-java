@@ -9,6 +9,7 @@ import com.codecool.hogwarts_potions.service.constants.BrewingServiceConstants;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -98,4 +99,44 @@ public class PotionService {
         return potionRepository.getPotionsByBrewerStudentId(studentId);
     }
 
+    public Potion addIngredientToPotion(Long id, Ingredient ingredient) {
+        Potion potion;
+
+        Optional<Potion> optionalPotion = potionRepository.findById(id);
+        Ingredient persistentIngredient;
+
+        if (optionalPotion.isPresent()) {
+            potion = optionalPotion.get();
+            persistentIngredient = ingredientService.getPersistentIngredientToPotion(ingredient);
+        } else {
+            return null;
+        }
+
+        potion.addIngredient(persistentIngredient);
+
+        List<Ingredient> sortedIngredients = ingredientService.sortIngredient(potion.getIngredients());
+
+        String ingredientsString = createIngredientString(sortedIngredients);
+
+        if (potion.getIngredients().size() == BrewingServiceConstants.MAX_INGREDIENTS_FOR_POTIONS) {
+            findBrewingStatus(potion, potion.getBrewerStudent().getId(), sortedIngredients, sortedIngredients, ingredientsString);
+        }
+
+        potion.setIngredients(ingredientService.sortIngredient(potion.getIngredients()));
+        potionRepository.saveAndFlush(potion);
+        return potion;
+    }
+
+    public List<Recipe> getRecipesForPotion(Long id) {
+        Optional<Potion> optionalPotion = potionRepository.findById(id);
+        List<Recipe> allRecipes = recipeService.getAllRecipes();
+
+        if (optionalPotion.isPresent() && allRecipes != null) {
+
+            return allRecipes.stream().filter(recipe -> recipe.getIngredients().containsAll(optionalPotion.get().getIngredients())).collect(Collectors.toList());
+
+        } else {
+            return null;
+        }
+    }
 }
