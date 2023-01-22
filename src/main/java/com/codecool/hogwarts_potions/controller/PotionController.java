@@ -28,6 +28,11 @@ public class PotionController {
         return potionService.brewPotion(id, ingredients);
     }
 
+    @GetMapping("/{id}")
+    public List<Potion> getAllPotionsForStudent(@PathVariable ("id") Long id){
+        return potionService.getPotionsByStudent(id);
+    }
+
 
 
 

@@ -94,4 +94,8 @@ public class PotionService {
         potion.setName(String.format("%s's replica", potion.getBrewerStudent().getName()));
     }
 
+    public List<Potion> getPotionsByStudent(Long studentId) {
+        return potionRepository.getPotionsByBrewerStudentId(studentId);
+    }
+
 }
