@@ -1,5 +1,6 @@
 package com.codecool.hogwarts_potions.service;
 
+import com.codecool.hogwarts_potions.handler.PotionHandler;
 import com.codecool.hogwarts_potions.model.BrewingStatus;
 import com.codecool.hogwarts_potions.model.Ingredient;
 import com.codecool.hogwarts_potions.model.Potion;
@@ -112,7 +113,8 @@ public class PotionService {
             return null;
         }
 
-        potion.addIngredient(persistentIngredient);
+        PotionHandler potionHandler=new PotionHandler(potion);
+        potionHandler.addIngredient(persistentIngredient);
 
         List<Ingredient> sortedIngredients = ingredientService.sortIngredient(potion.getIngredients());
 

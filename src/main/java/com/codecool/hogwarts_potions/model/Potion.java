@@ -28,10 +28,4 @@ public class Potion {
 
     @ManyToOne
     private Recipe recipe;
-
-
-    public void addIngredient(Ingredient ingredient){
-        ingredients.add(ingredient);
-    }
-
 }
