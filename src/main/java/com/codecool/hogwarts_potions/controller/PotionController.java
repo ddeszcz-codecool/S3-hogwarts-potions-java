@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("potions")
 public class PotionController {
     PotionService potionService;
 
@@ -18,23 +18,23 @@ public class PotionController {
     }
 
 
-    @GetMapping("/potions")
+    @GetMapping
     public List<Potion> getAllPotions(){
         return potionService.getAllPotions();
     }
 
 
-    @PostMapping("/potion/brew/{student-id}")
-    public Potion brewPotion(@PathVariable("student-id") Long id, @RequestBody List<Ingredient> ingredients) {
+    @PostMapping("/{prepared-by-student-id}")
+    public Potion brewPotion(@PathVariable("prepared-by-student-id") Long id, @RequestBody List<Ingredient> ingredients) {
         return potionService.brewPotion(id, ingredients);
     }
 
-    @GetMapping("/{id}")
-    public List<Potion> getAllPotionsForStudent(@PathVariable ("id") Long id){
+    @GetMapping("/{prepared-by-student-id}")
+    public List<Potion> getAllPotionsForStudent(@PathVariable ("prepared-by-student-id") Long id){
         return potionService.getPotionsByStudent(id);
     }
 
-    @PutMapping("/{potion-id}/add")
+    @PutMapping("/{potion-id}")
     public Object addIngredientToPotion(@PathVariable("potion-id") Long id, @RequestBody Ingredient ingredient){
         try {
             Potion potion = potionService.addIngredientToPotion(id, ingredient );
@@ -49,7 +49,7 @@ public class PotionController {
 
     }
 
-    @GetMapping("/{potion-id}/help")
+    @GetMapping("/help/{potion-id}")
     public List<Recipe> getRecipesForBrewingPotionIngredients(@PathVariable("potion-id") Long id){
         return potionService.getRecipesForPotion(id);
     }
