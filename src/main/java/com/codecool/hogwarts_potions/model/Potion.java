@@ -26,6 +26,9 @@ public class Potion {
     @ManyToMany
     private List<Ingredient> ingredients;
 
+
+
+//    @ManyToOne(cascade = CascadeType.All)  todo learn how to use cascade
     @ManyToOne
     private Recipe recipe;
 }
